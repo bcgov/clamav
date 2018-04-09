@@ -1,0 +1,2 @@
+freshclam -d &
+clamd
