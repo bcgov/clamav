@@ -6,13 +6,11 @@ RUN yum -y update
 RUN yum clean all
 RUN yum install -y clamav-server clamav-data clamav-update clamav-filesystem clamav clamav-scanner-systemd clamav-devel clamav-lib clamav-server-systemd
 
-COPY clamd.conf /etc/clamd.conf
-COPY freshclam.conf /etc/freshclam.conf
-COPY bootstrap.sh /opt/app-root/src/bootstrap.sh
+COPY config/clamd.conf /etc/clamd.conf
+COPY config/freshclam.conf /etc/freshclam.conf
 
 RUN chown -R 1001:0 /opt/app-root/src
 RUN chmod -R ug+rwx /opt/app-root/src
-RUN chmod a+x /opt/app-root/src/bootstrap.sh
 
 RUN wget -t 5 -T 99999 -O /opt/app-root/src/main.cvd http://database.clamav.net/main.cvd && \
    wget -t 5 -T 99999 -O /opt/app-root/src/daily.cvd http://database.clamav.net/daily.cvd && \
