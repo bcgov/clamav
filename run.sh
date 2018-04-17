@@ -1,2 +1,0 @@
-freshclam -d &
-clamd
