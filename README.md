@@ -1,4 +1,6 @@
-# clamav
+![Image of ClamAV](https://www.clamav.net/assets/clamav-trademark.png)
+# ClamAV 
+
 ClamAV® is an open source antivirus engine for detecting trojans, viruses, malware & other malicious threats.
 
 This is a repo setup for utilization in Red Hat Openshift.  This solution allows you to create a pod in your openshift environment to scan any file for known virus signatures, quickly and effectively.
