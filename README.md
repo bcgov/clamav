@@ -1,5 +1,7 @@
 # clamav
-Clamav service for openshift.  This solution allows you to create a pod in your openshift environment to scan any file for known virus signatures, quickly and effectively.
+ClamAV® is an open source antivirus engine for detecting trojans, viruses, malware & other malicious threats.
+
+This is a repo setup for utilization in Red Hat Openshift.  This solution allows you to create a pod in your openshift environment to scan any file for known virus signatures, quickly and effectively.
 
 The builds package the barebones service, and the deployment config will download latest signatures on first run.
 
