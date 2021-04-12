@@ -1,0 +1,73 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  name: clamav-mirror
+  namespace: 6cdc9e-dev
+  labels:
+    app: clamav-mirror
+    role: clamav-mirror
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - clamav-mirror
+        from:
+          kind: ImageStreamTag
+          namespace: 6cdc9e-tools
+          name: 'clamav-mirror:latest'
+  replicas: 1
+  revisionHistoryLimit: 10
+  test: false
+  selector:
+    app: clamav-mirror
+    deploymentconfig: clamav-mirror
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: clamav-mirror
+        deploymentconfig: clamav-mirror
+        role: clamav-mirror
+    spec:
+      containers:
+        - name: clamav-mirror
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/6cdc9e-tools/clamav-mirror@sha256:d4c9dd67b1ec3639adf73c9035cd3f4d891d46f28d9a6b81badc8ae5122126b2
+          ports:
+            - containerPort: 3310
+              protocol: TCP
+          env:
+            - name: RealIpFrom
+              value: '${REAL_IP_FROM}'
+            - name: AdditionalRealIpFromRules
+              value: '${AdditionalRealIpFromRules}'
+            - name: IpFilterRules
+              value: '${IpFilterRules}'
+          resources:
+            limits:
+              cpu: 300m
+              memory: 2Gi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler

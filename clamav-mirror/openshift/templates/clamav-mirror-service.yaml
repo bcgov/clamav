@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: clamav-mirror
+  namespace: 6cdc9e-dev
+  labels:
+    app: clamav-mirror
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: clamav-mirror
+    deploymentconfig: clamav-mirror
+  type: ClusterIP
+  sessionAffinity: None

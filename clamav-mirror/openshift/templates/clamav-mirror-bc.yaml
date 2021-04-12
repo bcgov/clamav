@@ -1,0 +1,36 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: clamav-mirror-build
+  namespace: 6cdc9e-tools
+  labels:
+    app: clamav-mirror
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'clamav-mirror:latest'
+  resources:
+    limits:
+      cpu: '1'
+      memory: 4Gi
+    requests:
+      cpu: 100m
+      memory: 2Gi
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  completionDeadlineSeconds: 1800
+  strategy:
+    type: Docker
+    dockerStrategy:
+      from:
+        kind: DockerImage
+        name: 'registry.redhat.io/ubi8/ubi:8.2'
+  postCommit: {}
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/marklise/clamav-mirror.git'
+      ref: ocp4
+  runPolicy: Serial
