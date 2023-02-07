@@ -21,6 +21,7 @@ spec:
       containers:
       - name: clamav
         image: "{{ .Values.clamav.image }}:{{ default .Chart.AppVersion .Values.clamav.version }}"
+        imagePullPolicy: "{{ .Values.clamav.imagePullPolicy }}"
         ports:
         - containerPort: 3310
           name: clamav

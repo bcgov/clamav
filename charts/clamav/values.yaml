@@ -17,7 +17,8 @@ clamav:
   image: clamav/clamav
   # clamav.version -- The clamav docker image version - defaults to .Chart.appVersion
   version: "latest"
-
+  # clamav.imagePullPolicy -- IfNotPresent 
+  imagePullPolicy: IfNotPresent 
   replicaCount: 1
 
   freshclam:
