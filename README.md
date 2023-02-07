@@ -17,6 +17,34 @@ The templates in the [openshift/templates](./openshift/templates) will build and
 
 The Helm chart deploys a standard StatefulSet. This deployment should work on [OpenShift Local](https://github.com/crc-org/crc), [kind](https://kind.sigs.k8s.io/) or even [Docker Desktop](https://docs.docker.com/desktop/kubernetes/)
 
+## OpenShift or OpenShift Local
+
+1. Optiona: create a namespace
+```
+oc new-project clamav-demo
+
+```
+2. Import the build config template and create the build config
+
+```
+oc apply -f openshift/clamav-bc.conf -n clamav-demo
+oc new-app --template=clamav
+```
+
+3. Start a build
+```
+oc start-build clamav-build
+```
+
+4. When the build is complete, new image stream tag should be avilable, `clamav` with a single image stream tag `clamav:latest`
+
+5. Deploy, if running locally be sure to set the clamav.freshclam.mirrors
+
+```
+cd charts
+helm install clamav clamav --set clamav.image=image-registry.openshift-image-registry.svc:5000/clamav-demo/clamav --set clamav.freshclam.mirrors=https://db.us.clamav.net
+```
+
 ### Kind
 
 Below are the steps required to deploy to [kind](https://kind.sigs.k8s.io/). When the container starts up it will need to pull

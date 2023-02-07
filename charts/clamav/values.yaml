@@ -36,7 +36,6 @@ clamav:
     # clamav.sendBufTimeout -- This option specifies how long to wait (in milliseconds) if the send buffer is full, keep low to avoid clamd hanging
     sendBufTimeout: 500
 
-
   resources:
     # clamav.resources -- The resource requests and limits for the clamav service
     requests:
@@ -45,3 +44,31 @@ clamav:
     limits:
       cpu: 2000m
       memory: 2Gi
+
+## Pod Security Context
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+## @param provisioning.podSecurityContext.enabled Enable pod Security Context
+## @param provisioning.podSecurityContext.fsGroup Group ID for the container
+##
+podSecurityContext:
+  enabled: true
+#  fsGroup: 1000660000
+  seccompProfile:
+    type: RuntimeDefault
+
+## Container Security Context
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
+## @param provisioning.containerSecurityContext.enabled Enable container Security Context
+## @param provisioning.containerSecurityContext.runAsUser User ID for the container
+## @param provisioning.containerSecurityContext.runAsNonRoot Avoid running as root User
+##
+containerSecurityContext:
+  enabled: true
+#  runAsUser: 1000660000
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: 
+    - "ALL"

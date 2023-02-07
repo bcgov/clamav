@@ -18,10 +18,16 @@ spec:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
+      {{- if .Values.podSecurityContext.enabled }}
+      securityContext: {{- omit .Values.podSecurityContext "enabled" | toYaml | nindent 8 }}
+      {{- end }}
       containers:
       - name: clamav
         image: "{{ .Values.clamav.image }}:{{ default .Chart.AppVersion .Values.clamav.version }}"
         imagePullPolicy: "{{ .Values.clamav.imagePullPolicy }}"
+        {{- if .Values.containerSecurityContext.enabled }}
+        securityContext: {{- omit .Values.containerSecurityContext "enabled" | toYaml | nindent 12 }}
+        {{- end }}
         ports:
         - containerPort: 3310
           name: clamav
