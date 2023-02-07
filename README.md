@@ -19,10 +19,9 @@ The Helm chart deploys a standard StatefulSet. This deployment should work on [O
 
 ## OpenShift or OpenShift Local
 
-1. Optiona: create a namespace
+1. Optional: if running on openshift local, create a namespace
 ```
 oc new-project clamav-demo
-
 ```
 2. Import the build config template and create the build config
 
