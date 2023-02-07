@@ -39,7 +39,7 @@ The commands are:
 3. Chages into the charts subdirectory
 4. Install the helm chart changing the docker image to the loaded image and changing the pull policy so it uses the loaded image.
 
-To delete clean up, 
+To clean up everything,
 
 ```
 docker rmi clamav:latest
