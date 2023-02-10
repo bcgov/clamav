@@ -13,6 +13,7 @@ RUN yum -y update \
   && rpm --import http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-8 \
   && yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 RUN yum install -y clamav-server clamav-data clamav-update clamav-filesystem clamav clamav-scanner-systemd clamav-devel clamav-lib clamav-server-systemd
+RUN yum install -y nc
 RUN yum install -y wget
 
 COPY config/clamd.conf /etc/clamd.conf
@@ -22,6 +23,10 @@ RUN mkdir /opt/app-root
 RUN mkdir /opt/app-root/src
 RUN chown -R 1001:0 /opt/app-root/src
 RUN chmod -R ug+rwx /opt/app-root/src
+
+# copy health check script to app-root 
+COPY clamdcheck.sh /opt/app-root
+RUN chmod ug+rwx /opt/app-root/clamdcheck.sh
 
 # # To fix check permissions error for clamAV
 RUN mkdir /var/log/clamav

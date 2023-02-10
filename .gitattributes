@@ -1,0 +1,2 @@
+clamdcheck.sh eol=lf
+config/* eol=lf
