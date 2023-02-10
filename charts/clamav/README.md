@@ -12,7 +12,7 @@ Kubernetes: `>= 1.18.0`
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| clamav.freshclam.mirrors | string | `"https://clamav-mirror.apps.silver.devops.gov.bc.ca"` | A list of clamav mirrors to be used by the clamav service |
+| clamav.freshclam.mirrors | array | `"https://clamav-mirror.apps.silver.devops.gov.bc.ca"` | A list of clamav mirrors to be used by the clamav service |
 | clamav.image | string | `"clamav/clamav"` | The clamav docker image |
 | clamav.limits.connectionQueueLength | int | `100` | Maximum length the queue of pending connections may grow to |
 | clamav.limits.fileSize | int | `30` | The largest file size scanable by clamav, in MB |

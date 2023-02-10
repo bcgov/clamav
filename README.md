@@ -37,11 +37,11 @@ oc start-build clamav-build
 
 4. When the build is complete, new image stream tag should be avilable, `clamav` with a single image stream tag `clamav:latest`
 
-5. Deploy, if running locally be sure to set the clamav.freshclam.mirrors
+5. Deploy, if running **locally** be sure to set the clamav.freshclam.mirrors to something your instance can reach. By default the mirrors are configured for internal BC Gov mirror.
 
 ```
 cd charts
-helm install clamav clamav --set clamav.image=image-registry.openshift-image-registry.svc:5000/clamav-demo/clamav --set clamav.freshclam.mirrors=https://db.us.clamav.net
+helm install clamav clamav --set clamav.image=image-registry.openshift-image-registry.svc:5000/clamav-demo/clamav --set clamav.freshclam.mirrors[0]=https://db.us.clamav.net
 ```
 
 ### Kind

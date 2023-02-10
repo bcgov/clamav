@@ -22,8 +22,10 @@ clamav:
   replicaCount: 1
 
   freshclam:
-    # clamav.freshclam.mirrors -- A list of clamav mirrors to be used by the clamav service
-    mirrors: https://clamav-mirror.apps.silver.devops.gov.bc.ca
+    # clamav.freshclam.mirrors -- A list of clamav mirrors to be used by the clamav service. By default, use the ClamAV Mirror provided in OCP4 Silver cluster
+    mirrors:
+    - https://clamav-mirror.apps.silver.devops.gov.bc.ca
+
   limits:
     # clamav.limits.fileSize -- The largest file size scanable by clamav, in MB
     fileSize: 30
