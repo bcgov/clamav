@@ -2,7 +2,7 @@ FROM registry.access.redhat.com/ubi9/ubi
 
 LABEL name="ubi8-clamav" \
       vendor="Red Hat" \
-      version="0.1.0" \
+      version="0.2.0" \
       release="1" \
       summary="UBI 9 ClamAV" \
       description="ClamAV for UBI 9" \
