@@ -1,15 +1,16 @@
 FROM registry.access.redhat.com/ubi9/ubi
+ARG VERSION=1.0.5
 
 LABEL name="ubi8-clamav" \
       vendor="Red Hat" \
-      version="0.2.0" \
+      version="${VERSION}" \
       release="1" \
       summary="UBI 9 ClamAV" \
       description="ClamAV for UBI 9" \
       maintainer="EPIC"
 
 RUN yum -y update
-RUN yum -y install https://www.clamav.net/downloads/production/clamav-1.0.1.linux.x86_64.rpm
+RUN yum -y install https://www.clamav.net/downloads/production/clamav-${VERSION}.linux.x86_64.rpm
 RUN yum -y install nc wget
 
 # copy our configs to where clamav expects
